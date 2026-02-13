@@ -1,0 +1,115 @@
+/* ===== Global Styles ===== */
+body {
+    font-family: "Arial", sans-serif;
+    background-color: #B0E0E6; /* flat powder blue */
+    color: #034f84; /* darker blue text for contrast */
+    margin: 0;
+    padding: 20px;
+}
+
+/* ===== Titles ===== */
+h1 {
+    text-align: center;
+    font-size: 2.5em;
+    color: #0177a2; /* ocean blue title */
+    margin-bottom: 20px;
+}
+
+/* ===== Forms ===== */
+input, button {
+    font-family: inherit;
+    font-size: 1em;
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: 2px solid #0177a2; /* flat border */
+    margin-bottom: 10px;
+    background-color: #E0F7FA; /* flat input/button background */
+    color: #034f84;
+    transition: all 0.2s ease;
+}
+
+input:focus {
+    outline: none;
+    border-color: #0177a2;
+}
+
+button:hover {
+    background-color: #0177a2;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* ===== Table ===== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    background-color: #B0E0E6; /* flat table background */
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #0177a2; /* flat border */
+}
+
+th {
+    background-color: #0177a2; 
+    color: #ffffff;
+}
+
+td button {
+    border: 1px solid #0177a2;
+    background-color: #E0F7FA;
+    color: #034f84;
+}
+
+td button:hover {
+    background-color: #0177a2;
+    color: #fff;
+}
+
+/* ===== Pagination Buttons ===== */
+#prev, #next {
+    margin: 5px;
+    border: 1px solid #0177a2;
+    background-color: #E0F7FA;
+    color: #034f84;
+    border-radius: 6px;
+}
+
+#prev:hover, #next:hover {
+    background-color: #0177a2;
+    color: #fff;
+}
+
+/* ===== Modal ===== */
+#modal {
+    background-color: #E0F7FA;
+    border: 2px solid #0177a2;
+    padding: 20px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    color: #034f84;
+    display: none;
+    border-radius: 10px;
+}
+
+#modal button { 
+    margin-right: 10px;
+}
+
+/* ===== Messages ===== */
+#msg { 
+    color: #0177a2; 
+    font-weight: bold; 
+    margin-top: 10px; 
+}
+
+/* ===== Flaky Page Load ===== */
+body[style*="opacity: 0"] { 
+    transition: opacity 0.3s ease-in-out; 
+}

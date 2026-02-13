@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Employees</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Logout button at top-right -->
+    <div style="display:flex; justify-content:flex-end; margin-bottom:10px;">
+      <button id="logoutBtn">Logout</button>
+    </div>
+  
+    <h1>Employees</h1>
+    <input type="text" id="search" placeholder="Search name">
+  
+    <table border="1">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="employeeTable"></tbody>
+    </table>
+  
+    <br>
+    <button id="prev">Prev</button>
+    <button id="next">Next</button>
+    <span id="pageInfo"></span>
+  
+    <!-- Modal -->
+    <div id="modal">
+      <p>Are you sure you want to delete?</p>
+      <button id="confirmDelete">Yes</button>
+      <button onclick="closeModal()">Cancel</button>
+    </div>
+  
+    <script>
+      /* Logout logic */
+      document.getElementById("logoutBtn").addEventListener("click", () => {
+        localStorage.removeItem("role");
+        location.href = "index.html";
+      });
+  
+      /* Check role */
+      const role = localStorage.getItem("role");
+      if (!role) location.href = "index.html";
+  
+      /* Employee data */
+      const employees = [];
+      for (let i = 1; i <= 25; i++) employees.push({id:i, name:"Employee "+i});
+  
+      let currentPage = 1;
+      const pageSize = 5;
+      let deleteId = null;
+  
+      /* Render Table */
+      function renderTable() {
+        const table = document.getElementById("employeeTable")
+        table.innerHTML = ""
+        const keyword = document.getElementById("search").value.toLowerCase()
+        const filtered = employees.filter(e => e.name.toLowerCase().includes(keyword))
+        const start = (currentPage-1)*pageSize
+        const pageData = filtered.slice(start, start+pageSize)
+        pageData.forEach(emp => {
+          const actionCell = role==="admin"? 
+            `<button onclick="openModal(${emp.id})">Delete</button>`:"No Permission"
+          const row = `<tr><td>${emp.id}</td><td>${emp.name}</td><td>${actionCell}</td></tr>`
+          table.innerHTML += row
+        })
+        document.getElementById("pageInfo").textContent = "Page " + currentPage
+      }
+  
+      /* Search */
+      document.getElementById("search").addEventListener("input", ()=>{
+        currentPage=1; renderTable()
+      })
+  
+      /* Pagination */
+      document.getElementById("next").addEventListener("click", ()=>{
+        currentPage++; renderTable()
+      })
+      document.getElementById("prev").addEventListener("click", ()=>{
+        if(currentPage>1) currentPage--; renderTable()
+      })
+  
+      /* Modal */
+      function openModal(id){ deleteId=id; document.getElementById("modal").style.display="block" }
+      function closeModal(){ document.getElementById("modal").style.display="none" }
+      document.getElementById("confirmDelete").addEventListener("click", ()=>{
+        const index = employees.findIndex(e=>e.id===deleteId)
+        if(index!==-1) employees.splice(index,1)
+        closeModal(); renderTable()
+      })
+  
+      /* Flaky page load */
+      document.body.style.opacity="0"
+      setTimeout(()=>{ document.body.style.opacity="1" }, Math.random()*500)
+  
+      renderTable()
+    </script>
+  </body>  
+</html>

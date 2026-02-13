@@ -1,0 +1,30 @@
+{
+  "name": "playwright-demo-site",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "test:e2e": "npx playwright test",
+    "dev:e2e": "concurrently --kill-others --success first \"npm run start\" \"npm run test:e2e\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^5.2.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SherryTesterious/playwright-demo-site.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SherryTesterious/playwright-demo-site/issues"
+  },
+  "homepage": "https://github.com/SherryTesterious/playwright-demo-site#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "playwright": "^1.58.2"
+  }
+}

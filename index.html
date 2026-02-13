@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | Mini HR</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Center login form vertically & horizontally */
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh; /* full viewport height */
+      background-color: #B0E0E6;
+    }
+
+    #loginContainer {
+      text-align: center;
+      padding: 30px;
+      border: 2px solid #0177a2;
+      border-radius: 10px;
+      background-color: #E0F7FA;
+    }
+
+    input, button {
+      width: 200px;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="loginContainer">
+    <h1>Demo Learning</h1>
+    <form id="loginForm">
+      <input type="text" id="username" placeholder="Username" required><br>
+      <input type="password" id="password" placeholder="Password" required><br>
+      <button type="submit">Login</button>
+    </form>
+    <div id="msg"></div>
+  </div>
+
+  <script>
+    const form = document.getElementById("loginForm")
+    const msg = document.getElementById("msg")
+
+    const users = {
+      admin: { password: "1234", role: "admin" },
+      user: { password: "1234", role: "user" }
+    }
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault()
+      const u = document.getElementById("username").value
+      const p = document.getElementById("password").value
+
+      msg.textContent = "Authenticating..."
+
+      setTimeout(() => {
+        if (users[u] && users[u].password === p) {
+          localStorage.setItem("role", users[u].role)
+          location.href = "employees.html"
+        } else {
+          msg.textContent = "Invalid credentials!"
+        }
+      }, 500)
+    })
+  </script>
+</body>
+</html>
